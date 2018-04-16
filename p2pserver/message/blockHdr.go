@@ -28,9 +28,9 @@ import (
 	"github.com/ontio/ontology/common/log"
 	"github.com/ontio/ontology/common/serialization"
 	"github.com/ontio/ontology/core/types"
-	"github.com/ontio/ontology/net/actor"
-	"github.com/ontio/ontology/net/protocol"
-	"fmt"
+	actor "github.com/ontio/ontology/p2pserver/actor/req"
+	"github.com/ontio/ontology/p2pserver/protocol"
+    "fmt"
 )
 
 type hdrHashReq struct {
@@ -200,7 +200,7 @@ func (msg blkHeader) Handle(node protocol.Noder) error {
 	for i = 0; i < msg.cnt; i++ {
 		blkHdr = append(blkHdr, &msg.blkHdr[i])
 	}
-	node.LocalNode().OnHeaderReceive(blkHdr)
+	actor.AddHeaders(blkHdr)
 	return nil
 }
 
