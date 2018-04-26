@@ -56,6 +56,10 @@ const (
 	MAX_RETRY_COUNT       = 3         //max reconnect time of remote peer
 	CHAN_CAPABILITY       = 10000     //chhannel capability of recv link
 	SYNC_BLK_WAIT         = 2         //time interval for blk sync check
+	MAXOUTBOUNDCNT        = 8
+	DEFAULTMAXPEERS       = 125
+	GETADDRMAX            = 2500
+	NEEDADDRESSTHRESHOLD  = 1000
 )
 
 // The peer state

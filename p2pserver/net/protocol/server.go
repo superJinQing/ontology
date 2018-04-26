@@ -59,4 +59,7 @@ type P2P interface {
 	DelNbrNode(id uint64) (*peer.Peer, bool)
 	NodeEstablished(uint64) bool
 	Xmit([]byte, bool)
+	RandGetAddresses(nbrAddrs []common.PeerAddr) []common.PeerAddr
+	RandSelectAddresses() []common.PeerAddr
+	AddAddressToKnownAddress(p common.PeerAddr)
 }

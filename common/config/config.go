@@ -64,6 +64,9 @@ type Configuration struct {
 	MaxHdrSyncReqs    int              `json:"MaxConcurrentSyncHeaderReqs"`
 	ConsensusType     string           `json:"ConsensusType"`
 	SystemFee         map[string]int64 `json:"SystemFee"`
+	DefaultMaxPeers   uint32           `json:"DefaultMaxPeers"`
+	GetAddrMax        uint32           `json:"GetAddrMax"`
+	MaxOutboundCnt    uint32           `json:"MaxOutboundCnt"`
 }
 
 type configFile struct {

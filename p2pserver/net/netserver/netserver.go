@@ -36,6 +36,7 @@ import (
 	"github.com/ontio/ontology/common/config"
 	"github.com/ontio/ontology/common/log"
 	"github.com/ontio/ontology/p2pserver/common"
+	"github.com/ontio/ontology/p2pserver/linkcontrol"
 	"github.com/ontio/ontology/p2pserver/message/msg_pack"
 	"github.com/ontio/ontology/p2pserver/net/protocol"
 	"github.com/ontio/ontology/p2pserver/peer"
@@ -66,6 +67,7 @@ type NetServer struct {
 	ConnectingNodes
 	PeerAddrMap
 	Np *peer.NbrPeers
+	Al *linkcontrol.KnownAddressList
 }
 
 //ConnectingNodes include all addr in connecting state
@@ -624,4 +626,19 @@ func (this *NetServer) RemovePeerConsAddress(addr string) {
 	if _, ok := this.PeerConsAddress[addr]; ok {
 		this.PeerConsAddress[addr] = nil
 	}
+}
+
+//RandGetAddresses random get peer from known address list
+func (this *NetServer) RandGetAddresses(nbrAddrs []common.PeerAddr) []common.PeerAddr {
+	return this.Al.RandGetAddresses(nbrAddrs)
+}
+
+//RandSelectAddresses random select  peer from known address list
+func (this *NetServer) RandSelectAddresses() []common.PeerAddr {
+	return this.Al.RandSelectAddresses()
+}
+
+//AddAddressToKnownAddress add  peer on make known address list
+func (this *NetServer) AddAddressToKnownAddress(p common.PeerAddr) {
+	this.Al.AddAddressToKnownAddress(p)
 }
