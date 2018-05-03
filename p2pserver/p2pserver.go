@@ -416,7 +416,7 @@ func (this *P2PServer) keepOnlineService() {
 		case <-t.C:
 			this.connectSeeds()
 			this.ConnectNode()
-			this.retryInactivePeer()
+			//this.retryInactivePeer()
 			t.Stop()
 			t.Reset(time.Second * common.CONN_MONITOR)
 		case <-this.quitOnline:
