@@ -210,6 +210,11 @@ func (this *NetServer) DelNbrNode(id uint64) (*peer.Peer, bool) {
 	return this.Np.DelNbrNode(id)
 }
 
+//RandGetANbr return a nbr peer
+func (this *NetServer) RandGetANbr() *peer.Peer {
+	return this.Np.RandGetANbr()
+}
+
 //GetNeighbors return all nbr peer
 func (this *NetServer) GetNeighbors() []*peer.Peer {
 	return this.Np.GetNeighbors()

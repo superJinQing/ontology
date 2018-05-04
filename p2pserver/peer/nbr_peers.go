@@ -171,3 +171,15 @@ func (this *NbrPeers) GetNbrNodeCnt() uint32 {
 	}
 	return count
 }
+
+//RandGetANbr random get a neighbor peer
+func (this *NbrPeers) RandGetANbr() *Peer {
+	this.RLock()
+	defer this.RUnlock()
+	for _, n := range this.List {
+		if n.GetSyncState() == common.ESTABLISH {
+			return n
+		}
+	}
+	return nil
+}

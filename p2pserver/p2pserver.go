@@ -329,6 +329,7 @@ func (this *P2PServer) connectSeeds() {
 	}
 }
 
+//ConnectNode connect other peers
 func (this *P2PServer) ConnectNode() {
 	cntcount := this.network.GetConnectionCnt()
 	if cntcount < this.GetMaxOutboundCnt() {
@@ -342,6 +343,16 @@ func (this *P2PServer) ConnectNode() {
 			na := ip.To16().String() + ":" + strconv.Itoa(int(port))
 			go this.network.Connect(na, false)
 		}
+	}
+}
+
+//CheckConnCnt check connection count
+func (this *P2PServer) CheckConnCnt() {
+	//compare if connect count is larger than DefaultMaxPeers, disconnect one of the connection
+	if this.network.GetConnectionCnt() > this.GetDefaultMaxPeers() {
+		disconnNode := this.network.RandGetANbr()
+		disconnNode.CloseSync()
+		disconnNode.CloseCons()
 	}
 }
 
@@ -720,7 +731,6 @@ func (this *P2PServer) SetDefaultMaxPeers() {
 func (this *P2PServer) GetGetAddrMax() uint32 {
 	return this.GetAddrMax
 }
-
 func (this *P2PServer) GetMaxOutboundCnt() uint32 {
 	return this.MaxOutboundCnt
 }
