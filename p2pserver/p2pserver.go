@@ -321,7 +321,9 @@ func (this *P2PServer) connectSeeds() {
 		np.Unlock()
 		if found {
 			if p.GetSyncState() == common.ESTABLISH {
-				this.reqNbrList(p)
+				if this.network.NeedMoreAddresses() {
+					this.reqNbrList(p)
+				}
 			}
 		} else { //not found
 			go this.network.Connect(nodeAddr, false)

@@ -647,3 +647,8 @@ func (this *NetServer) RandSelectAddresses() []common.PeerAddr {
 func (this *NetServer) AddAddressToKnownAddress(p common.PeerAddr) {
 	this.Al.AddAddressToKnownAddress(p)
 }
+
+//NeedMoreAddresses if need to send address message
+func (this *NetServer) NeedMoreAddresses() bool {
+	return this.Al.NeedMoreAddresses()
+}
